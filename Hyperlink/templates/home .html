@@ -1,0 +1,13 @@
+<html>
+    <head>
+        <title>
+            {% block title %}
+            {% endblock title %}
+        </title>
+    </head>
+    <body>
+        {% include "menu.html" %}
+        {% block main %}
+        {% endblock main %}
+    </body>
+</html>

@@ -1,0 +1,12 @@
+<html>
+    <head>
+        <title>Welcome</title>
+    </head>
+    <body>
+        <h1>Welcome {{val}}</h1>
+        <ul>
+            <li><a href="{% url 'welcome_name' val="by welcome page url" %}">welcome (current)</a>
+            <li><a href="{% url 'welcome_to_home_name' "by welcome page url" %}">welcome to home</a>
+        </ul>
+    </body>
+</html>

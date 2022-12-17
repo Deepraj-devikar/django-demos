@@ -1,0 +1,13 @@
+<html>
+    <head>
+        <title>
+            {% block title %}
+            {% endblock title %}
+        </title>
+    </head>
+    <body>
+        {% block main %}
+        {% endblock main %}
+        {% include "info.html" with val="checking" %}
+    </body>
+</html>

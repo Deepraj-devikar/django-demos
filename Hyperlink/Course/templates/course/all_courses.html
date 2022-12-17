@@ -1,0 +1,12 @@
+{% extends "home.html" %}
+
+{% block title %}
+    All Courses
+{% endblock title %}
+
+{% block main %}
+    <ul>
+        <a href="{% url 'course.djangoCourse' %}"><li>Django</li></a>
+        <a href="{% url 'course.nodeCourse' %}"><li>Node</li></a>
+    </ul>
+{% endblock main %}

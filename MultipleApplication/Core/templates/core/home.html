@@ -1,0 +1,32 @@
+{% load static %}
+<html>
+    <head>
+        <title>
+            {% block title %}
+            {% endblock title %}
+        </title>
+        <link rel="stylesheet" href="{% static 'core/css/bootstrap.css' %}">
+        <link rel="stylesheet" href="{% static 'core/css/core.css' %}">
+        {% block page_css_files %}
+        {% endblock page_css_files %}
+    </head>
+    <body>
+        <ul>
+            <li><a href="{% url 'django_course' %}">Django Course</a></li>
+            <li><a href="{% url 'node_course' %}">Node Course</a></li>
+            <li><a href="{% url 'unknown_course' "Laravel" %}">Laravel Unknown Course</a></li>
+            <li><a href="{% url 'django_fees' %}">Django Fees</a></li>
+            <li><a href="{% url 'node_fees' %}">Node Fees</a></li>
+            <li><a href="{% url 'unknown_fees' "Laravel" %}">Unknown Fees Laravel</a></li>
+            <li><a href="{% url 'unknown_fees' "Laravel" "50" %}">Unknown Fees Laravel 50 Rs.</a></li>
+            <li><a href="{% url 'unknown' "check" %}">Invalid Path</a></li>
+        </ul>
+        {% block main %}
+        {% endblock main %}
+        <script src="{% static 'core/js/jquery.js' %}"></script>
+        <script src="{% static 'core/js/popper.js' %}"></script>
+        <script src="{% static 'core/js/bootstrap.js' %}"></script>
+        {% block page_js_files %}
+        {% endblock page_js_files %}
+    </body>
+</html>

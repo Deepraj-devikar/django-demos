@@ -1,0 +1,34 @@
+<html>
+    <head>
+        <title>
+            {{courseName | upper}}
+        </title>
+    </head>
+    <body>
+        <h1>{{user | default:"guest" | capfirst}} Learn {{courseName}}</h1>
+        <ul>
+            <li>Duration : {{duration}}</li>
+            <li>Seats : {{seats}}</li>
+            <li>Date : {{now | date:'D d M Y'}}</li>
+            <li>Time : {{now | time:'H:i:s'}}</li>
+            <li>Amount : {{amount | floatformat:2}}</li>
+        </ul>
+        {% if courseName and seats %}
+            Hello {{courseName}}
+        {% endif %}
+        <p>
+            Description: {{description | capfirst | slice:150 }}...
+        </p>
+        {% for student in students %}
+            {{forloop.counter}} {{student}}<br>
+        {% endfor %}
+        <br>
+        {% for student in students %}
+            {% if not forloop.first %}, {% endif %}{{student}}
+        {% endfor %}
+        <br>
+        {% for teacherID, teacher in teachers.items %}
+            Teacher ID : {{teacherID}}, Teacher Name : {{teacher.name}}, Subject : {{teacher.subject}} <br>
+        {% endfor %}
+    </body>
+</html>

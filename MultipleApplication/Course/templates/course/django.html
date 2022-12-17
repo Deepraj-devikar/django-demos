@@ -1,0 +1,11 @@
+{% extends "core\home.html" %}
+{% load static %}
+
+{% block title %}
+    Django Course
+{% endblock title %}
+
+{% block main %}
+    <h1>Hello Django</h1>
+    <img src="{% static 'course/img/django.png' %}">
+{% endblock main %}
