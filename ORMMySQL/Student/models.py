@@ -6,7 +6,7 @@ class Student(models.Model):
     rollNumber = models.IntegerField()
     
     def __str__(self):
-        return "("+self.rollNumber+") "+self.studentName
+        return "("+str(self.rollNumber)+") "+self.studentName
 
 class Teacher(models.Model):
     teacher_name = models.CharField(max_length = 150)
@@ -14,4 +14,4 @@ class Teacher(models.Model):
     roll_number = models.IntegerField()
 
     def __str__(self):
-        return "("+self.roll_number+") "+self.teacher_name
+        return "("+str(self.roll_number)+") "+self.teacher_name
