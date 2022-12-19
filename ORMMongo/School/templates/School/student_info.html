@@ -1,0 +1,19 @@
+<html>
+    <head>
+        <title>
+            Student Info 
+        </title>
+    </head>
+    <body>
+        <h1>Students</h1>
+        <ul>
+            {% if students %}
+                {% for student in students %}
+                    <li>({{student.rollNumber}}), {{student.studentName}}, {{student.studentEmail}}</li>
+                {% endfor %}
+            {% else %}
+                Not any student found
+            {% endif %}
+        </ul>
+    </body>
+</html>
