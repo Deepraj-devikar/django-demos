@@ -16,7 +16,7 @@
         <h1>Form 2</h1>
         <form>
             <table>
-                {% for form_field in personForm %}
+                {% for form_field in personForm.visible_fields %}
                     <div>
                         <label for="{{form_field.id_for_label}}">type 1 {{form_field.label}}</label> | 
                         {{form_field.label_tag}}
@@ -24,6 +24,11 @@
                         {{form_field.help_text}}
                         {{form_field.field.widget.input_type}}
                         {{form_field.field.required}}
+                    </div>
+                {% endfor %}
+                {% for hidden_form_field in personForm.hidden_fields %}
+                    <div>
+                        {{hidden_form_field}}
                     </div>
                 {% endfor %}
             </table>

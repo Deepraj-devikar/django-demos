@@ -6,4 +6,5 @@ class PersonForm(forms.Form):
     age = forms.IntegerField(initial = 24)
     first_name = forms.CharField(initial = "Ganesh")
     # underscore will be convert to space charachter while showing in form 
+    key = forms.CharField(widget = forms.HiddenInput())
     
