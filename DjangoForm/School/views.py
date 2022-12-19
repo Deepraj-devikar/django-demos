@@ -6,7 +6,7 @@ def person_form(request, *args, **kwargs):
     data["personForm"] = PersonForm(
         auto_id = "some_%s", 
         label_suffix = " Some :-  ",
-        initial={"name": "Ganesh"}
+        initial={"name": "Ganesh", "age": 20}
     )
     #-----------------auto_id-----------------
     # auto_id by default 'id_%s',
