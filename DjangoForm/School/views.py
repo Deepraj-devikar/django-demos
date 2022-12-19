@@ -17,5 +17,8 @@ def person_form(request, *args, **kwargs):
     #-----------------intial---------------------
     # for setting initial values of fields
     # we can use it in edit page
+    data["personForm"].order_fields(["name", "first_name"])
+    # we can set fields order
+    # if some fields not included in order_fields then that remaining feilds will follow default order after mentioned fields
     return render(request, "School/person_form.html", data)
     
