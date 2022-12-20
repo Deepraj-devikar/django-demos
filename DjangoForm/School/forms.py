@@ -1,4 +1,5 @@
 from django import forms 
+from django.core import validators
 
 GEEKS_CHOICES =(
     ("1", "One"),
@@ -65,3 +66,11 @@ class StudentForm(forms.Form):
         if len(value_of_email) < 10:
             raise forms.ValidationError(["Your email should be more than 10 characters in whole validation.", "second"])
         raise forms.ValidationError({"name": [], "email": ["first one", "second one"], "password": "third one"})
+
+def starts_with_s(value):
+    if value[0] != 's':
+        raise forms.ValidationError("Name should start with s")
+
+class TeacherForm(forms.Form):
+    name = forms.CharField(validators=[validators.MaxLengthValidator(10), starts_with_s])
+    email = forms.EmailField()

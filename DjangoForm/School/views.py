@@ -55,3 +55,21 @@ def student_form(request, *args, **kwargs):
 
 def student_info(request, *args, **kwargs):
     return render(request, "School/student_info.html", {})
+
+def teacher_form(request, *args, **kwargs):
+    data = {}
+    if request.method == 'POST':
+        teacherForm = TeacherForm(request.POST)
+        if teacherForm.is_valid():
+            print("Form Validated")
+            for formField, formFieldValue in teacherForm.cleaned_data.items():
+                print(formField+" => "+str(formFieldValue))
+            url = reverse("teacher_info")
+            return HttpResponseRedirect(url)
+    else:
+        teacherForm = TeacherForm()
+    data["teacherForm"] = teacherForm
+    return render(request, "School/teacher_form.html", data)
+
+def teacher_info(request, *args, **kwargs):
+    return render(request, "School/teacher_info.html", {})
