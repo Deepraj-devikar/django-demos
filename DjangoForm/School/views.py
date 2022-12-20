@@ -1,4 +1,6 @@
 from django.shortcuts import render
+from django.http import HttpResponseRedirect
+from django.urls import reverse
 from .forms import *
 
 def person_form(request, *args, **kwargs):
@@ -9,6 +11,9 @@ def person_form(request, *args, **kwargs):
             print("Form Validated")
             for formField, formFieldValue in personForm.cleaned_data.items():
                 print(formField+" => "+str(formFieldValue))
+            url = reverse("person_info")
+            return HttpResponseRedirect(url)             
+            # return render(request, "School/person_info.html", data)
     else:
         personForm = PersonForm(
             auto_id = "some_%s", 
@@ -29,4 +34,8 @@ def person_form(request, *args, **kwargs):
     # if some fields not included in order_fields then that remaining feilds will follow default order after mentioned fields
     data["personForm"] = personForm
     return render(request, "School/person_form.html", data)
+
+def person_info(request, *args, **kwargs):
+    return render(request, "School/person_info.html", {})
+
     
