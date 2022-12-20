@@ -74,3 +74,15 @@ def starts_with_s(value):
 class TeacherForm(forms.Form):
     name = forms.CharField(validators=[validators.MaxLengthValidator(10), starts_with_s])
     email = forms.EmailField()
+    password = forms.CharField(widget = forms.PasswordInput)
+    confirm_password = forms.CharField(widget = forms.PasswordInput)
+
+    def clean(self):
+        """
+            Validate all form fields
+        """
+        cleaned_data = super().clean()
+        value_of_password = self.cleaned_data["password"]
+        value_of_confirm_password = self.cleaned_data['confirm_password']
+        if value_of_password != value_of_confirm_password:
+            raise forms.ValidationError({"confirm_password": "Your password and confirm password are not matched."})
