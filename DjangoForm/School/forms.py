@@ -44,8 +44,24 @@ class StudentForm(forms.Form):
     email = forms.EmailField()
     password = forms.CharField(widget = forms.PasswordInput)
 
-    def clean_name(self):
+    # def clean_name(self):
+    #     """
+    #         Validate one form field
+    #     """
+    #     value_of_name = self.cleaned_data["name"]
+    #     if len(value_of_name) < 4:
+    #         raise forms.ValidationError("Your name should be more than 4 characters.")
+    #     return value_of_name
+
+    def clean(self):
+        """
+            Validate all form fields
+        """
+        cleaned_data = super().clean()
         value_of_name = self.cleaned_data["name"]
+        value_of_email = self.cleaned_data['email']
         if len(value_of_name) < 4:
-            raise forms.ValidationError("Your name should be more than 4 characters.")
-        return value_of_name
+            raise forms.ValidationError("Your name should be more than 4 characters in whole validation.")
+        if len(value_of_email) < 10:
+            raise forms.ValidationError(["Your email should be more than 10 characters in whole validation.", "second"])
+        raise forms.ValidationError({"name": [], "email": ["first one", "second one"], "password": "third one"})
