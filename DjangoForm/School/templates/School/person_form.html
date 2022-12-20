@@ -11,7 +11,8 @@
     </head>
     <body>
         <h1>Form 1</h1>
-        <form>
+        <form action="" method="POST">
+            {% csrf_token %}
             <table>
                 {{personForm.as_p}}
             </table>
@@ -20,6 +21,7 @@
         </hr>
         <h1>Form 2</h1>
         <form>
+            {% csrf_token %}
             <table>
                 {% for form_field in personForm.visible_fields %}
                     <div>
