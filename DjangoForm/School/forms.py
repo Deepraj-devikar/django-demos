@@ -14,7 +14,7 @@ class PersonForm(forms.Form):
     age = forms.IntegerField(initial = 24)
     first_name = forms.CharField(initial = "Ganesh")
     # underscore will be convert to space charachter while showing in form 
-    key = forms.CharField(widget = forms.HiddenInput())
-    address = forms.CharField(widget = forms.Textarea)
-    policy = forms.CharField(widget = forms.CheckboxInput)
-    image = forms.CharField(widget = forms.FileInput)
+    key = forms.CharField(widget = forms.HiddenInput(), initial = 15, required = False)
+    address = forms.CharField(widget = forms.Textarea, required = False)
+    policy = forms.CharField(widget = forms.CheckboxInput, required = False, initial = "accepted")
+    image = forms.CharField(widget = forms.FileInput, required = False)
