@@ -38,3 +38,14 @@ class PersonForm(forms.Form):
     rate = forms.FloatField(min_value = 5, max_value = 40)
     choose_number = forms.ChoiceField(choices = GEEKS_CHOICES)
     agree = forms.BooleanField(label = "I agree", label_suffix = "")
+
+class StudentForm(forms.Form):
+    name = forms.CharField()
+    email = forms.EmailField()
+    password = forms.CharField(widget = forms.PasswordInput)
+
+    def clean_name(self):
+        value_of_name = self.cleaned_data["name"]
+        if len(value_of_name) < 4:
+            raise forms.ValidationError("Your name should be more than 4 characters.")
+        return value_of_name

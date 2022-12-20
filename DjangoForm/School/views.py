@@ -38,4 +38,20 @@ def person_form(request, *args, **kwargs):
 def person_info(request, *args, **kwargs):
     return render(request, "School/person_info.html", {})
 
-    
+def student_form(request, *args, **kwargs):
+    data = {}
+    if request.method == 'POST':
+        studentForm = StudentForm(request.POST)
+        if studentForm.is_valid():
+            print("Form Validated")
+            for formField, formFieldValue in studentForm.cleaned_data.items():
+                print(formField+" => "+str(formFieldValue))
+            url = reverse("student_info")
+            return HttpResponseRedirect(url)
+    else:
+        studentForm = StudentForm()
+    data["studentForm"] = studentForm
+    return render(request, "School/student_form.html", data)
+
+def student_info(request, *args, **kwargs):
+    return render(request, "School/student_info.html", {})
