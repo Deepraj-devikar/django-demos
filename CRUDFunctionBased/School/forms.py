@@ -12,3 +12,7 @@ class StudentForm(forms.ModelForm):
             'email': forms.EmailInput(attrs={'class': 'form-control'}),
             'password': forms.PasswordInput(render_value = True, attrs={'class': 'form-control'})
         }
+
+# we can inherit one form into another form 
+# both forms model form or both forms are normal forms 
+# or parent form is model form and child form is normal form and vice versa
