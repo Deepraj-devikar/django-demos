@@ -59,8 +59,12 @@ class StudentForm(forms.Form):
             Validate all form fields
         """
         cleaned_data = super().clean()
-        value_of_name = self.cleaned_data["name"]
-        value_of_email = self.cleaned_data['email']
+        value_of_name = ""
+        if "name" in self.cleaned_data:
+            value_of_name = self.cleaned_data["name"]
+        value_of_email = ""
+        if "email" in self.cleaned_data:
+            value_of_email = self.cleaned_data['email']
         if len(value_of_name) < 4:
             raise forms.ValidationError("Your name should be more than 4 characters in whole validation.")
         if len(value_of_email) < 10:
@@ -72,6 +76,9 @@ def starts_with_s(value):
         raise forms.ValidationError("Name should start with s")
 
 class TeacherForm(forms.Form):
+    # for showing error classes in trs of that specific fields
+    error_css_class = "error_class"
+    required_css_class = "required_error_class"
     name = forms.CharField(validators=[validators.MaxLengthValidator(10), starts_with_s])
     email = forms.EmailField()
     password = forms.CharField(widget = forms.PasswordInput)
@@ -82,7 +89,11 @@ class TeacherForm(forms.Form):
             Validate all form fields
         """
         cleaned_data = super().clean()
-        value_of_password = self.cleaned_data["password"]
-        value_of_confirm_password = self.cleaned_data['confirm_password']
+        value_of_password = ""
+        if "password" in self.cleaned_data:
+            value_of_password = self.cleaned_data["password"]
+        value_of_confirm_password = ""
+        if "confirm_password" in self.cleaned_data:
+            value_of_confirm_password = self.cleaned_data['confirm_password']
         if value_of_password != value_of_confirm_password:
             raise forms.ValidationError({"confirm_password": "Your password and confirm password are not matched."})
