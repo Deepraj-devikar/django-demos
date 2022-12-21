@@ -41,35 +41,36 @@ class PersonForm(forms.Form):
     agree = forms.BooleanField(label = "I agree", label_suffix = "")
 
 class StudentForm(forms.Form):
-    name = forms.CharField()
-    email = forms.EmailField()
+    student_name = forms.CharField()
+    student_email = forms.EmailField()
     password = forms.CharField(widget = forms.PasswordInput)
+    roll_number = forms.IntegerField(min_value = 1, max_value = 1000)
 
     # def clean_name(self):
     #     """
     #         Validate one form field
     #     """
-    #     value_of_name = self.cleaned_data["name"]
-    #     if len(value_of_name) < 4:
+    #     value_of_student_name = self.cleaned_data["student_name"]
+    #     if len(value_of_student_name) < 4:
     #         raise forms.ValidationError("Your name should be more than 4 characters.")
-    #     return value_of_name
+    #     return value_of_student_name
 
     def clean(self):
         """
             Validate all form fields
         """
         cleaned_data = super().clean()
-        value_of_name = ""
-        if "name" in self.cleaned_data:
-            value_of_name = self.cleaned_data["name"]
-        value_of_email = ""
-        if "email" in self.cleaned_data:
-            value_of_email = self.cleaned_data['email']
-        if len(value_of_name) < 4:
+        value_of_student_name = ""
+        if "student_name" in self.cleaned_data:
+            value_of_student_name = self.cleaned_data["student_name"]
+        value_of_student_email = ""
+        if "student_email" in self.cleaned_data:
+            value_of_student_email = self.cleaned_data['student_email']
+        if len(value_of_student_name) < 4:
             raise forms.ValidationError("Your name should be more than 4 characters in whole validation.")
-        if len(value_of_email) < 10:
+        if len(value_of_student_email) < 10:
             raise forms.ValidationError(["Your email should be more than 10 characters in whole validation.", "second"])
-        raise forms.ValidationError({"name": [], "email": ["first one", "second one"], "password": "third one"})
+        # raise forms.ValidationError({"student_name": [], "student_email": ["first one", "second one"], "password": "third one"})
 
 def starts_with_s(value):
     if value[0] != 's':
@@ -79,10 +80,11 @@ class TeacherForm(forms.Form):
     # for showing error classes in trs of that specific fields
     error_css_class = "error_class"
     required_css_class = "required_error_class"
-    name = forms.CharField(validators=[validators.MaxLengthValidator(10), starts_with_s])
-    email = forms.EmailField()
+    teacher_name = forms.CharField(validators=[validators.MaxLengthValidator(10), starts_with_s])
+    teacher_email = forms.EmailField()
     password = forms.CharField(widget = forms.PasswordInput)
     confirm_password = forms.CharField(widget = forms.PasswordInput)
+    roll_number = forms.IntegerField(min_value = 1, max_value = 1000)
 
     def clean(self):
         """

@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from .forms import *
+from .models import *
 
 def person_form(request, *args, **kwargs):
     data = {}
@@ -46,6 +47,14 @@ def student_form(request, *args, **kwargs):
             print("Form Validated")
             for formField, formFieldValue in studentForm.cleaned_data.items():
                 print(formField+" => "+str(formFieldValue))
+            student_data = studentForm.cleaned_data
+            student = Student(
+                student_name = student_data['student_name'],
+                student_email = student_data['student_email'],
+                roll_number = student_data['roll_number'],
+                password = student_data['password']
+            )
+            student.save()
             url = reverse("student_info")
             return HttpResponseRedirect(url)
     else:
@@ -64,6 +73,14 @@ def teacher_form(request, *args, **kwargs):
             print("Form Validated")
             for formField, formFieldValue in teacherForm.cleaned_data.items():
                 print(formField+" => "+str(formFieldValue))
+            teacher_data = teacherForm.cleaned_data
+            teacher = Teacher(
+                teacher_name = teacher_data['teacher_name'],
+                teacher_email = teacher_data['teacher_email'],
+                password = teacher_data['password'],
+                roll_number = teacher_data['roll_number']
+            )
+            teacher.save()
             url = reverse("teacher_info")
             return HttpResponseRedirect(url)
     else:
