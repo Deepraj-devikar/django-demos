@@ -30,3 +30,6 @@ def show_subdetails(request, my_id, my_subid, **check):
 def home(request):
     return render(request, "createurl/home.html")
     
+def show_year(request, year):
+    return render(request, "createurl/show_year.html", {"year": year})
+    

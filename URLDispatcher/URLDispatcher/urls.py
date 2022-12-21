@@ -14,9 +14,12 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, register_converter
 
 from CreateURL import views as createURL
+from CreateURL import converters
+
+register_converter(converters.FourDigitYearConverter, "yyyy")
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -25,5 +28,6 @@ urlpatterns = [
     path('detail/', createURL.show_details, {"check": "OK"}, name="detail"),
     path('detail/<my_id>/', createURL.show_details, {"check": "OK"}, name="detail"),
     path('detail/<my_id>/<my_subid>', createURL.show_subdetails, {"check": "OK"}, name="detail"),
-    path('home/', createURL.home, name="home")
+    path('home/', createURL.home, name="home"),
+    path('session/<yyyy:year>', createURL.show_year, name="show_year")
 ]
