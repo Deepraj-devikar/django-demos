@@ -1,5 +1,6 @@
 from django import forms 
 from django.core import validators
+from .models import *
 
 GEEKS_CHOICES =(
     ("1", "One"),
@@ -99,3 +100,13 @@ class TeacherForm(forms.Form):
             value_of_confirm_password = self.cleaned_data['confirm_password']
         if value_of_password != value_of_confirm_password:
             raise forms.ValidationError({"confirm_password": "Your password and confirm password are not matched."})
+
+class StudentModelForm(forms.ModelForm):
+    class Meta:
+        model = Student
+        fields = ['roll_number', 'student_name', 'student_email', 'password']
+
+class TeacherModelForm(forms.ModelForm):
+    class Meta:
+        model = Teacher
+        fields = ['roll_number', 'teacher_name', 'teacher_email', 'password']

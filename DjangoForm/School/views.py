@@ -63,6 +63,30 @@ def student_form(request, *args, **kwargs):
     data["studentForm"] = studentForm
     return render(request, "School/student_form.html", data)
 
+def student_model_form(request, *args, **kwargs):
+    data = {}
+    if request.method == 'POST':
+        studentForm = StudentModelForm(request.POST)
+        if studentForm.is_valid():
+            print("Form Validated")
+            for formField, formFieldValue in studentForm.cleaned_data.items():
+                print(formField+" => "+str(formFieldValue))
+            student_data = studentForm.cleaned_data
+            student = Student(
+                id = 1, # for update id is given
+                student_name = student_data['student_name'],
+                student_email = student_data['student_email'],
+                roll_number = student_data['roll_number'],
+                password = student_data['password']
+            )
+            student.save()
+            url = reverse("student_info")
+            return HttpResponseRedirect(url)
+    else:
+        studentForm = StudentModelForm()
+    data["studentForm"] = studentForm
+    return render(request, "School/student_form.html", data)
+
 def student_info(request, *args, **kwargs):
     return render(request, "School/student_info.html", {})
 
@@ -92,6 +116,30 @@ def teacher_form(request, *args, **kwargs):
             return HttpResponseRedirect(url)
     else:
         teacherForm = TeacherForm()
+    data["teacherForm"] = teacherForm
+    return render(request, "School/teacher_form.html", data)
+
+def teacher_model_form(request, *args, **kwargs):
+    data = {}
+    if request.method == 'POST':
+        teacherForm = TeacherModelForm(request.POST)
+        if teacherForm.is_valid():
+            print("Form Validated")
+            for formField, formFieldValue in teacherForm.cleaned_data.items():
+                print(formField+" => "+str(formFieldValue))
+            teacher_data = teacherForm.cleaned_data
+            teacher = Teacher(
+                id = 1, # for update id is given
+                teacher_name = teacher_data['teacher_name'],
+                teacher_email = teacher_data['teacher_email'],
+                password = teacher_data['password'],
+                roll_number = teacher_data['roll_number']
+            )
+            teacher.save()
+            url = reverse("teacher_info")
+            return HttpResponseRedirect(url)
+    else:
+        teacherForm = TeacherModelForm()
     data["teacherForm"] = teacherForm
     return render(request, "School/teacher_form.html", data)
 
