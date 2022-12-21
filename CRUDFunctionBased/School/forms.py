@@ -5,6 +5,8 @@ class StudentForm(forms.ModelForm):
     class Meta:
         model = Student
         fields = ['name', 'email', 'password']
+        # we can give values to fields like '__all__' it will take all fields of model
+        # one more attribute 'exclude' it will take list or tuple of that fields which vahe to exclude from form 
         widgets = {
             'name': forms.TextInput(attrs={'class': 'form-control'}),
             'email': forms.EmailInput(attrs={'class': 'form-control'}),
