@@ -49,6 +49,7 @@ def student_form(request, *args, **kwargs):
                 print(formField+" => "+str(formFieldValue))
             student_data = studentForm.cleaned_data
             student = Student(
+                id = 1, # for update id is given
                 student_name = student_data['student_name'],
                 student_email = student_data['student_email'],
                 roll_number = student_data['roll_number'],
@@ -75,6 +76,7 @@ def teacher_form(request, *args, **kwargs):
                 print(formField+" => "+str(formFieldValue))
             teacher_data = teacherForm.cleaned_data
             teacher = Teacher(
+                id = 1, # for update id is given
                 teacher_name = teacher_data['teacher_name'],
                 teacher_email = teacher_data['teacher_email'],
                 password = teacher_data['password'],
