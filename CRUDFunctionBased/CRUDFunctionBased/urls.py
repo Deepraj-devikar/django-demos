@@ -19,5 +19,8 @@ from django.urls import path
 from School import views
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.add, name="add"),
+    path('', views.show, name="show"),
+    path('add/', views.add_update, name="add"),
+    path('update/<int:id>/', views.add_update, name="update"),
+    path('delete/<int:id>/', views.delete, name="delete"),
 ]
