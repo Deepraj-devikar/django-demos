@@ -1,0 +1,20 @@
+{% load static %}
+<html>
+    <head>
+        <title>  
+            CRUD - Application          
+        </title>
+        <link rel="stylesheet" href="{% static 'school/css/bootstrap.css' %}">
+    </head>
+    <body>
+        <div class="container mt-5">
+            <h2 class="text-center alert alert-danger">Function Based View Model Form CRUD Project</h2>
+            {% block content %}
+            
+            {% endblock content %}
+        </div>
+        <script src="{% static 'school/js/jquery.js' %}"></script>
+        <script src="{% static 'school/js/popper.js' %}"></script>
+        <script src="{% static 'school/js/bootstrap.js' %}"></script>
+    </body>
+</html>
