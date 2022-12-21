@@ -22,4 +22,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('welcome_to_home/<str:val>', createURL.welcome_to_home, name="welcome_to_home_name"),
     path('welcome/<str:val>', createURL.welcome, name="welcome_name"),
+    path('detail/', createURL.show_details, {"check": "OK"}, name="detail"),
+    path('detail/<my_id>/', createURL.show_details, {"check": "OK"}, name="detail"),
+    path('detail/<my_id>/<my_subid>', createURL.show_subdetails, {"check": "OK"}, name="detail"),
+    path('home/', createURL.home, name="home")
 ]

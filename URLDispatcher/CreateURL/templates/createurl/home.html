@@ -1,0 +1,18 @@
+<html>
+    <head>
+        <title>
+            Document
+        </title>
+    </head>
+    <body>
+        This is home template file
+        <a href="{% url 'detail' "check" %}">Check</a><br>
+        <a href="{% url 'detail' "1" %}">Student 1</a><br>
+        <a href="{% url 'detail' "2" %}">Student 2</a><br>
+        <a href="{% url 'detail' "3" %}">Student 3</a><br>
+
+        <a href="{% url 'detail' "1" "5" %}">sub Student 1</a><br>
+        <a href="{% url 'detail' "2" "6" %}">sub Student 2</a><br>
+        <a href="{% url 'detail' "3" "7" %}">sub Student 3</a><br>
+    </body>
+</html>
