@@ -13,7 +13,7 @@ def person_form(request, *args, **kwargs):
             for formField, formFieldValue in personForm.cleaned_data.items():
                 print(formField+" => "+str(formFieldValue))
             url = reverse("person_info")
-            return HttpResponseRedirect(url)             
+            return HttpResponseRedirect(url)        
             # return render(request, "School/person_info.html", data)
     else:
         personForm = PersonForm(
@@ -66,6 +66,11 @@ def student_form(request, *args, **kwargs):
 def student_info(request, *args, **kwargs):
     return render(request, "School/student_info.html", {})
 
+def student_delete(request, *args, **kwargs):
+    student = Student(id = 1)
+    student.delete()
+    return HttpResponseRedirect("/admin/School/student")
+
 def teacher_form(request, *args, **kwargs):
     data = {}
     if request.method == 'POST':
@@ -92,3 +97,8 @@ def teacher_form(request, *args, **kwargs):
 
 def teacher_info(request, *args, **kwargs):
     return render(request, "School/teacher_info.html", {})
+
+def teacher_delete(request, *args, **kwargs):
+    teacher = Teacher(id = 1)
+    teacher.delete()
+    return HttpResponseRedirect("/admin/School/teacher")
