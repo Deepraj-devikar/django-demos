@@ -63,6 +63,20 @@ def student_form(request, *args, **kwargs):
     data["studentForm"] = studentForm
     return render(request, "School/student_form.html", data)
 
+def student_update(request, *args, **kwargs):
+    data = {}
+    student = Student.objects.get(pk = 1)
+    if request.method == 'POST':
+        studentForm = StudentModelForm(request.POST, instance = student)
+        if studentForm.is_valid():
+            studentForm.save()
+            url = reverse("student_info")
+            return HttpResponseRedirect(url)
+    else:
+        studentForm = StudentModelForm(instance = student)
+    data["studentForm"] = studentForm
+    return render(request, "School/student_form.html", data)
+
 def student_model_form(request, *args, **kwargs):
     data = {}
     if request.method == 'POST':
@@ -116,6 +130,20 @@ def teacher_form(request, *args, **kwargs):
             return HttpResponseRedirect(url)
     else:
         teacherForm = TeacherForm()
+    data["teacherForm"] = teacherForm
+    return render(request, "School/teacher_form.html", data)
+
+def teacher_update(request, *args, **kwargs):
+    data = {}
+    teacher = Teacher.objects.get(pk = 1)
+    if request.method == 'POST':
+        teacherForm = TeacherModelForm(request.POST, instance = teacher)
+        if teacherForm.is_valid():
+            teacherForm.save()
+            url = reverse("teacher_info")
+            return HttpResponseRedirect(url)
+    else:
+        teacherForm = TeacherModelForm(instance = teacher)
     data["teacherForm"] = teacherForm
     return render(request, "School/teacher_form.html", data)
 
