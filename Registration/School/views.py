@@ -1,15 +1,15 @@
 from django.shortcuts import render
-from django.contrib.auth.forms import UserCreationForm
+from .forms import *
 
 def sign_up(request):
     if request.method == 'POST':
-        user_creation_form = UserCreationForm(request.POST)
-        if user_creation_form.is_valid():
-            user_creation_form.save()
+        sign_up_form = SignUpForm(request.POST)
+        if sign_up_form.is_valid():
+            sign_up_form.save()
     else:
-        user_creation_form = UserCreationForm()
+        sign_up_form = SignUpForm()
     data = {
-        'user_creation_form': user_creation_form
+        'sign_up_form': sign_up_form
     }
     return render(request, "school/sign_up.html", data)
     

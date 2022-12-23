@@ -11,7 +11,7 @@
     <body>
         <form method="POST" novalidate>
             {% csrf_token %}
-            {% for form_field in user_creation_form %}
+            {% for form_field in sign_up_form %}
                 {{form_field.label_tag}}
                 {{form_field}}
                 {{form_field.errors|striptags}}
