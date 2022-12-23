@@ -2,7 +2,7 @@ from django.shortcuts import render
 from .forms import *
 from django.contrib import messages
 from django.contrib.auth.forms import AuthenticationForm
-from django.contrib.auth import authenticate, login as user_login, logout
+from django.contrib.auth import authenticate, login as user_login, logout as user_logout
 from django.http import HttpResponseRedirect 
 
 def sign_up(request):
@@ -40,4 +40,7 @@ def login(request):
 def profile(request):
     return render(request, "school/profile.html", {})
     
+def logout(request):
+    user_logout(request)
+    return HttpResponseRedirect('/login/')
     

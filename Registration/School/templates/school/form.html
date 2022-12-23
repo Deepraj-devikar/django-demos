@@ -26,6 +26,13 @@
         </style>
     </head>
     <body>
+        {% if form.non_field_errors %}
+            <ul>
+                {% for non_field_error in form.non_field_errors %}
+                    <li>{{non_field_error}}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
         <form method="POST" novalidate>
             {% csrf_token %}
             {% for form_field in form %}
