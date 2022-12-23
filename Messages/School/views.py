@@ -7,7 +7,8 @@ def student_registration(request):
         student_registration_form = StudentRegistrationModelForm(request.POST)
         if student_registration_form.is_valid():
             student_registration_form.save()
-            messages.add_message(request, messages.SUCCESS, "Your registration have been successful")
+            messages.add_message(request, messages.SUCCESS, "Your registration have been successful.")
+            messages.info(request, "Now you can log in.")
     else:
         student_registration_form = StudentRegistrationModelForm()
     data = {

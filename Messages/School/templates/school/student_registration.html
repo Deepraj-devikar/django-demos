@@ -7,6 +7,14 @@
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="">
+        <style>
+            .success{
+                color: green;
+            }
+            .info{
+                color: blue;
+            }
+        </style>
     </head>
     <body>
         <form method="POST">
@@ -16,7 +24,13 @@
         </form>
         {% if messages %}
             {% for message in messages %}
-                {{message}}
+                <span
+                    {% if message.tags %}
+                        class="{{message.tags}}"
+                    {% endif %}
+                >
+                    {{message}}
+                </span>            
             {% endfor %}
         {% endif %}
     </body>
