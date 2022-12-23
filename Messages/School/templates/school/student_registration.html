@@ -8,16 +8,25 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="">
         <style>
-            .success{
-                color: green;
+            .debug{
+                color: gray;
             }
             .info{
                 color: blue;
             }
+            .success{
+                color: green;
+            }
+            .warning{
+                color: yellow;
+            }
+            .danger{
+                color: red;
+            }
         </style>
     </head>
     <body>
-        <form method="POST">
+        <form method="POST" novalidate>
             {% csrf_token %}
             {{student_registration_form.as_p}}
             <input type="submit" value"Register">
@@ -29,6 +38,16 @@
                         class="{{message.tags}}"
                     {% endif %}
                 >
+                {% comment %} we have bootstrap class like class="alert-{{message.tags}}" {% endcomment %}
+                {% comment %} 
+                    we can change our tag name like we have error tag and its name also error 
+                    we have to change its name we have to make error tag name as danger
+                    we can do it from settings.py file by adding one dictionary 
+                    MESSAGE_TAGS = {
+                        messages.ERROR: 'danger'
+                    }
+                    like that way we can change any of tag name 
+                {% endcomment %}
                     {{message}}
                 </span>            
             {% endfor %}
