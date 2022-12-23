@@ -1,0 +1,15 @@
+.debug{
+    color: gray;
+}
+.info{
+    color: blue;
+}
+.success{
+    color: green;
+}
+.warning{
+    color: yellow;
+}
+.error{
+    color: red;
+}

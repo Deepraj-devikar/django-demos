@@ -23,4 +23,6 @@ urlpatterns = [
     path('login/', login, name="login"),
     path('profile/', profile, name="profile"),
     path('logout/', logout, name="logout"),
+    path('change_password/', change_password, name="change_password"),
+    path('<path:path>', not_found, name="not_found")
 ]

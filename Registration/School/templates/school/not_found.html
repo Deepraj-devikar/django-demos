@@ -1,5 +1,5 @@
 {% extends 'school/app.html' %}
 
 {% block content %}
-    Hi {{request.user.username}}
+    {{path |default_if_none:""}} path not found
 {% endblock content %}
