@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from .forms import *
 from django.contrib import messages
-from django.contrib.auth.forms import AuthenticationForm, PasswordChangeForm
+from django.contrib.auth.forms import AuthenticationForm, PasswordChangeForm, SetPasswordForm
 from django.contrib.auth import authenticate, login as user_login, logout as user_logout, update_session_auth_hash
 from django.http import HttpResponseRedirect 
 
@@ -87,6 +87,25 @@ def change_password(request, *args, **kwargs):
     data = {
         'form': password_change_form,
         'title': "Change Password",
+    }
+    return render(request, "school/form.html", data)
+
+@if_user_is_authenticated
+def set_password(request, *args, **kwargs):
+    if request.method == 'POST':
+        set_password_form = SetPasswordForm(user=request.user, data=request.POST)
+        if set_password_form.is_valid():
+            set_password_form.save()
+            messages.success(request, "Password changed successfully.")
+            # this function will keep you loged in
+            update_session_auth_hash(request, set_password_form.user)
+            # messages.info(request, "Please log in again.")
+            return HttpResponseRedirect('/profile/')
+    else:
+        set_password_form = SetPasswordForm(request.user)
+    data = {
+        'form': set_password_form,
+        'title': "Set Password",
     }
     return render(request, "school/form.html", data)
 
