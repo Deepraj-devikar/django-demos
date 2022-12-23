@@ -62,10 +62,18 @@ def login(request, *args, **kwargs):
 
 @if_user_is_authenticated
 def profile(request, *args, **kwargs):
+    if request.method == 'POST':
+        user_change_form = EditUserProfileForm(instance=request.user, data=request.POST)
+        if user_change_form.is_valid():
+            user_change_form.save()
+            messages.success(request, "User information changed successfully.")
+    else:
+        user_change_form = EditUserProfileForm(instance=request.user)
     data = {
+        'form': user_change_form,
         'title': "Profile",
     }
-    return render(request, "school/profile.html", {})
+    return render(request, "school/form.html", data)
         
 def logout(request, *args, **kwargs):
     user_logout(request)
