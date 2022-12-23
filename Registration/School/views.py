@@ -6,6 +6,8 @@ from django.contrib.auth import authenticate, login as user_login, logout as use
 from django.http import HttpResponseRedirect 
 
 def sign_up(request):
+    if request.user.is_authenticated:
+        return HttpResponseRedirect('/profile/')
     if request.method == 'POST':
         sign_up_form = SignUpForm(request.POST)
         if sign_up_form.is_valid():
@@ -20,6 +22,8 @@ def sign_up(request):
     return render(request, "school/form.html", data)
     
 def login(request):
+    if request.user.is_authenticated:
+        return HttpResponseRedirect('/profile/')
     if request.method == 'POST':
         login_form = AuthenticationForm(request=request, data=request.POST)
         if login_form.is_valid():
@@ -38,8 +42,10 @@ def login(request):
     return render(request, "school/form.html", data)
 
 def profile(request):
-    return render(request, "school/profile.html", {})
-    
+    if request.user.is_authenticated:
+        return render(request, "school/profile.html", {})
+    return HttpResponseRedirect('/login/')
+        
 def logout(request):
     user_logout(request)
     return HttpResponseRedirect('/login/')
