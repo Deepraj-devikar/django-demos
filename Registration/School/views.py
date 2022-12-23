@@ -2,7 +2,7 @@ from django.shortcuts import render
 from .forms import *
 from django.contrib import messages
 from django.contrib.auth.forms import AuthenticationForm, PasswordChangeForm
-from django.contrib.auth import authenticate, login as user_login, logout as user_logout
+from django.contrib.auth import authenticate, login as user_login, logout as user_logout, update_session_auth_hash
 from django.http import HttpResponseRedirect 
 
 def if_user_is_authenticated(view_function):
@@ -78,8 +78,10 @@ def change_password(request, *args, **kwargs):
         if password_change_form.is_valid():
             password_change_form.save()
             messages.success(request, "Password changed successfully.")
-            messages.info(request, "Please log in again.")
-            return HttpResponseRedirect('/login/')
+            # this function will keep you loged in
+            update_session_auth_hash(request, password_change_form.user)
+            # messages.info(request, "Please log in again.")
+            return HttpResponseRedirect('/profile/')
     else:
         password_change_form = PasswordChangeForm(request.user)
     data = {
