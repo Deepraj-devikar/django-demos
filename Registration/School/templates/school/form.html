@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>User Registration</title>
+        <title>{{title |default_if_none:""}}</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="">
@@ -28,10 +28,10 @@
     <body>
         <form method="POST" novalidate>
             {% csrf_token %}
-            {% for form_field in sign_up_form %}
+            {% for form_field in form %}
                 {{form_field.label_tag}}
                 {{form_field}}
-                {{form_field.errors|striptags}}
+                {{form_field.errors |striptags}}
                 <br><br>
             {% endfor %}
             <input type="submit" value="Submit">
@@ -47,5 +47,13 @@
                 </span>            
             {% endfor %}
         {% endif %}
+        <ul>
+            <li>
+                <a href="{% url 'sign_up' %}">Sign Up</a>
+            </li>
+            <li>
+                <a href="{% url 'login' %}">Login</a>
+            </li>
+        </ul>
     </body>
 </html>
