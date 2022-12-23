@@ -14,5 +14,14 @@ def student_registration(request):
     data = {
         'student_registration_form': student_registration_form
     }
+    print(messages.get_level(request))
+    # Levels according to message tag
+    # Debug => 10
+    # Info => 20
+    # Success => 25
+    # Warning => 30
+    # Error => 40
+    # we can manually set levels 
+    # messages.set_level(request, [messages.DEBUD | messages.INFO | messages.SUCCESS | messages.WARNING | messages.ERROR])
     return render(request, 'school/student_registration.html', data)
     
