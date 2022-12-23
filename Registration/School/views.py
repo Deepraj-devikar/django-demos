@@ -74,10 +74,12 @@ def logout(request, *args, **kwargs):
 @if_user_is_authenticated
 def change_password(request, *args, **kwargs):
     if request.method == 'POST':
-        password_change_form = PasswordChangeForm(request=request, data=request.POST)
+        password_change_form = PasswordChangeForm(user=request.user, data=request.POST)
         if password_change_form.is_valid():
             password_change_form.save()
-            return HttpResponseRedirect('/profile/')
+            messages.success(request, "Password changed successfully.")
+            messages.info(request, "Please log in again.")
+            return HttpResponseRedirect('/login/')
     else:
         password_change_form = PasswordChangeForm(request.user)
     data = {
